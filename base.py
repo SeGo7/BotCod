@@ -99,8 +99,8 @@ class DatabaseManager:
 
     def get_info_class(self, class_name) -> str:
         res = f"Информация о классе {class_name}:\n"
-        res += "{:<30} {:<10} {:<10} {:<10}\n".format("Ученик", "Гуляет", "Болеет", "По заявлению")
-        res += "-" * 80 + "\n"
+        res += "{:<25} {:<5} {:<5} {:<5}\n".format("Ученик", "Гул", "Бол", "Заяв")
+        res += "-" * 42 + "\n"
 
         self.cursor.execute('''SELECT * FROM children WHERE class_name = ?''', (class_name,))
         for child in self.cursor.fetchall():
@@ -109,7 +109,7 @@ class DatabaseManager:
             sick = "✔" if child[7] else "✖"
             request = "✔" if child[8] else "✖"
 
-            res += "{:<30} {:<10} {:<10} {:<10}\n".format(name, walks, sick, request)
+            res += "{:<25} {:<5} {:<5} {:<5}\n".format(name, walks, sick, request)
 
         return res
 
